@@ -14,6 +14,9 @@ $ npm install
 # to start Docker
 $ docker-compose up -d
 
+# to stop Docker
+$ docker-compose down
+
 # development
 $ npm run start
 
