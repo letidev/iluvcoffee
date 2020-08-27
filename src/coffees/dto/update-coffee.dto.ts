@@ -1,4 +1,4 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { PartialType } from '@nestjs/swagger';
 import { CreateCoffeeDto } from './create-coffee.dto';
 
 // All of the properties of the extended type are made optional.
