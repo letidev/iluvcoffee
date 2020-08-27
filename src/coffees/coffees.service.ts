@@ -44,7 +44,7 @@ export class CoffeesService {
     });
   }
 
-  async findOne(id: string) {
+  async findOne(id: number) {
     const coffee = await this.coffeeRepository.findOne(id, {
       relations: ['flavors'],
     });
@@ -56,9 +56,7 @@ export class CoffeesService {
   }
 
   async create(createCoffeeDto: CreateCoffeeDto) {
-    const flavors = await Promise.all(
-      createCoffeeDto.flavors.map(name => this.preloadFlavorByName(name)),
-    );
+    const flavors = await Promise.all(createCoffeeDto.flavors.map(name => this.preloadFlavorByName(name)));
 
     const coffee = this.coffeeRepository.create({
       ...createCoffeeDto,
@@ -70,9 +68,7 @@ export class CoffeesService {
   async update(id: string, updateCoffeeDto: UpdateCoffeeDto) {
     const flavors =
       updateCoffeeDto.flavors &&
-      (await Promise.all(
-        updateCoffeeDto.flavors.map(name => this.preloadFlavorByName(name)),
-      ));
+      (await Promise.all(updateCoffeeDto.flavors.map(name => this.preloadFlavorByName(name))));
 
     // preload first checks if the entity exists otherwise returns undefined
     // then it replaces all of the data with the one passed to it
@@ -88,7 +84,7 @@ export class CoffeesService {
     return this.coffeeRepository.save(coffee);
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     const coffee = await this.findOne(id);
     return this.coffeeRepository.remove(coffee);
   }
